@@ -1,7 +1,7 @@
-package dao;
+package daolmp;
 
 import java.util.List;
-public interface flowerdao {
+public interface flowerdaoint {
     public boolean addorder(int storeid,int flowerid,int customerid,int cnt,float price);
     public boolean adduser(String name,int phone,String gender,String username,String password);
     public boolean addstore(String name,int phone,String address,String username,String password);

@@ -5,20 +5,20 @@ import java.util.List;
 public interface daoFactory {
     public class DaoFactory extends DaoFactoryabs{
 
-        public DaoFlower getDaoFlower(){
-            return new DaoFlower();
+        public daoFlower getDaoFlower(){
+            return new daoFlower();
         }
 
-        public DaoOrder getDaoOrder() {
-            return new DaoOrder();
+        public daoOrder getDaoOrder() {
+            return new daoOrder();
         }
 
-        public DaoUser getDaoUser(){
-            return new DaoUser();
+        public daoUser getDaoUser(){
+            return new daoUser();
         }
 
-        public DaoWarehouse getDaoWarehouse() {
-            return new DaoWarehouse();
+        public daoWarehouse getDaoWarehouse() {
+            return new daoWarehouse();
         }
 
 
