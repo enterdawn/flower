@@ -2,7 +2,7 @@ package dao;
 
 import daolmp.*;
 
-public abstract class DaoFactoryabs {
+public abstract class daofactoryabs {
     private static daoFactory dfactory;
 
     public static daoFactory getInstance()

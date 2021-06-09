@@ -1,28 +1,23 @@
 package dao;
 
-import java.util.List;
+import daolmp.*;
 
-public interface daoFactory {
-    public class DaoFactory extends DaoFactoryabs{
+public class daoFactory extends daofactoryabs {
 
-        public daoFlower getDaoFlower(){
-            return new daoFlower();
-        }
+    public flowerdao getDaoFlower(){
+        return new flowerdao();
+    }
 
-        public daoOrder getDaoOrder() {
-            return new daoOrder();
-        }
+    public orderdao getDaoOrder() {
+        return new orderdao();
+    }
 
-        public daoUser getDaoUser(){
-            return new daoUser();
-        }
+    public userdao getDaoUser(){
+        return new userdao();
+    }
 
-        public daoWarehouse getDaoWarehouse() {
-            return new daoWarehouse();
-        }
-
-
-
+    public storedao getDaoWarehouse() {
+        return new storedao();
     }
 
 }
