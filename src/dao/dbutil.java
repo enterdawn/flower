@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class dbutil implements sqlinfo{
-    public Connection getConn() throws Exception{
-        Connection c;
+    public static Connection getConn() throws Exception{
         Class.forName(diver);
+        Connection c;
         c = DriverManager.getConnection(url, uname, passwd);
         return c;
     }

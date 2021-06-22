@@ -1,4 +1,12 @@
 package BI;
+import dao.daofactoryabs;
+import daolmp.flowerdao;
+import ent.*;
+public class BIfactory extends BIfactoryab{
 
-public class BIfactory {
+    public login getlogin(){
+        return new login();
+    }
+
+
 }
