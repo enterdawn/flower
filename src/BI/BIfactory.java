@@ -4,8 +4,11 @@ import daolmp.flowerdao;
 import ent.*;
 public class BIfactory extends BIfactoryab{
 
-    public login getlogin(){
-        return new login();
+    public customer getCustomerService(){
+        return new customer();
+    }
+    public flowerstore getStorerService (){
+        return new flowerstore();
     }
 
 

@@ -34,12 +34,14 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "radioButton1"
 				"text": "商店"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "radioButton1ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 5 5"
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "radioButton2"
 				"text": "用户"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "radioButton2ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 7 5"
 			} )

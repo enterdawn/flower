@@ -1,23 +1,38 @@
 package BI;
 
+import java.util.ArrayList;
 import java.util.List;
 import dao.*;
 import ent.*;
+import ent.flowerstore;
 
 public class customer implements CustomerService{
-    public boolean login(String username,String password){
+    public customerent login(String username,String password){
         customerent User=new customerent();
-        return true;
+        User= daofactoryabs.getInstance().getDaoUser().getuserinfo(username);
+        return User;
     }
-    public List<String> getflower(String flowerid, String name, String color, float lowprice) {
-        return null;
+    public ArrayList<flowerstore> getstorelist(){
+        return daofactoryabs.getInstance().getDaoWarehouse().getstorelist();
+    }
+    public ArrayList<flower> getflower(int storeid) {
+        return daoFactory.getInstance().getDaoFlower().getflowerinfo(storeid);
     }
 
-    public boolean addorder(String flowerid, int userid, int count) {
-        return false;
+    public boolean change(customerent User) {
+        return daoFactory.getInstance().getDaoUser().change(User);
+    }
+    public boolean addorder(int storeid, int flowerid, int customerid, int cnt, float price){
+        return daoFactory.getInstance().getDaoOrder().addorder(storeid,flowerid, customerid,cnt, price);
+    }
+    public flower getflowerinfo(int flowerid){
+        return daoFactory.getInstance().getDaoOrder().getflowerinfo(flowerid);
+    }
+    public String getstorename(int storeid){
+        return daoFactory.getInstance().getDaoOrder().getstorename(storeid);
     }
 
-    public List<String> seeorder(int userid) {
-        return null;
+    public ArrayList<orders> seeorder(int userid) {
+        return daoFactory.getInstance().getDaoOrder().custgetorder(userid);
     }
 }

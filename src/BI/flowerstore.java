@@ -1,17 +1,23 @@
 package BI;
 
+import java.util.ArrayList;
 import java.util.List;
+import dao.*;
+import ent.flower;
 
 public class flowerstore implements FlowerStoreService{
-    public boolean login(String username,String password){
-        return true;
+    public ent.flowerstore login(String username, String password){
+        return daoFactory.getInstance().getDaoWarehouse().login(username,password);
     }
     public boolean addflower() {
         return false;
     }
 
-    public List<String> getflower(int storeid) {
-        return null;
+    public ArrayList<flower> getflower(int storeid) {
+        return daoFactory.getInstance().getDaoFlower().getflowerinfo(storeid);
+    }
+    public int getflowersaledd(int flowerid){
+        return daoFactory.getInstance().getDaoOrder().getflowerasled(flowerid);
     }
 
     public List<String> getorder(int storeid) {

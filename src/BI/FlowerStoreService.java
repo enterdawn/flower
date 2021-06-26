@@ -1,4 +1,7 @@
 package BI;
+import ent.flower;
+import ent.flowerstore;
+
 import java.util.*;
 public interface FlowerStoreService {
     /*
@@ -12,11 +15,12 @@ public interface FlowerStoreService {
     8 出库
      */
     //public boolean addorder(int flowerid,int userid,int count);
-    public boolean login(String username,String password);
+    public flowerstore login(String username, String password);
     public boolean addflower();
-    public List<String> getflower(int storeid);
+    public ArrayList<flower> getflower(int storeid);
     public List<String> getorder(int storeid);
     public List<String> getsale(int storeid);
+    public int getflowersaledd(int flowerid);
     public boolean inflower(int flowerid,int storeid,int count);
     public boolean outflower(int flowerid,int storeid,int count);
 }

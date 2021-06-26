@@ -12,6 +12,7 @@ public abstract class BIfactoryab {
         BIfactory= new BIfactory();
         return BIfactory;
     }
-    public abstract login getlogin();
+    public abstract customer getCustomerService ();
+    public abstract flowerstore getStorerService ();
 
 }
