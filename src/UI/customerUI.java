@@ -28,6 +28,7 @@ public class customerUI extends JFrame {
     public customerUI(customerent User) {
         initComponents();
         this.User=User;
+        table1.getTableHeader().setReorderingAllowed( false ) ;
         table1.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         stores= BIfactory.getInstance().getCustomerService().getstorelist();
         //System.out.println(stores.size());

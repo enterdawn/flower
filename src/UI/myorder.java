@@ -24,11 +24,12 @@ public class myorder extends JFrame {
     customerent User;
     String a[][]={};
     int selectrow=-1;
-    String columnNames[]={"商店","鲜花","单价","数量","状态"};
+    String columnNames[]={"商店","鲜花","单价","数量","时间","状态"};
     ArrayList<orders> myorder;
     public myorder(customerent User) {
         this.User=User;
         initComponents();
+        table1.getTableHeader().setReorderingAllowed( false ) ;
         table1.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         myorder= BIfactory.getInstance().getCustomerService().seeorder(User.getid());
         for (int i = 0; i < myorder.size(); i++) {
@@ -39,7 +40,7 @@ public class myorder extends JFrame {
                 sta="未出库";
             }
             else sta="已出库";
-            String values[]={name, color.getName()+"-"+color.getColor(), String.valueOf(myorder.get(i).getPrice()), String.valueOf(myorder.get(i).getCount()),sta};
+            String values[]={name, color.getName()+"-"+color.getColor(), String.valueOf(myorder.get(i).getPrice()), String.valueOf(myorder.get(i).getCount()),myorder.get(i).getTime().toString(),sta};
             tableModel1.addRow(values);
         }
 
@@ -62,8 +63,53 @@ public class myorder extends JFrame {
             "hidemode 3",
             // columns
             "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[fill]" +
             "[fill]",
             // rows
+            "[]" +
+            "[]" +
             "[]" +
             "[]" +
             "[]"));
@@ -72,7 +118,7 @@ public class myorder extends JFrame {
         {
             scrollPane1.setViewportView(table1);
         }
-        contentPane.add(scrollPane1, "cell 0 0 2 3");
+        contentPane.add(scrollPane1, "cell 0 1 45 3");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents

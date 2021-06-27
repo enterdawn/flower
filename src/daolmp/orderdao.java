@@ -49,7 +49,7 @@ public class orderdao implements orderdaoint{
         return false;
     }
     public int getflowerasled(int flowerid){
-        String sql="select sum(count) from orders where flowerid='"+flowerid+"' and status=2;";
+        String sql="select sum(count) from orders where flowerid='"+flowerid+"' and status=0;";
         //System.out.println(sql);
         try{
             PreparedStatement t = c.prepareStatement(sql);
@@ -64,7 +64,27 @@ public class orderdao implements orderdaoint{
         return 0;
     }
     public ArrayList<orders> storegetorder(int storeid){
-        return null;
+        ArrayList<orders> tmp=new ArrayList<>();
+        try {
+            String sql="select * from orders where storeid='"+storeid+"' order by time desc;";
+            PreparedStatement t = c.prepareStatement(sql);
+            ResultSet s=t.executeQuery();
+            while(s.next()){
+                orders tm=new orders();
+                tm.setId(s.getInt("id"));
+                tm.setPrice(s.getFloat("price"));
+                tm.setCount(s.getInt("count"));
+                tm.setCustomerid(s.getInt("customerid"));
+                tm.setStatus(s.getBoolean("status"));
+                tm.setFlowerid(s.getInt("flowerid"));
+                tm.setTime(s.getTimestamp("time"));
+                tm.setStoreid(s.getInt("storeid"));
+                tmp.add(tm);
+            }
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage()+"查询失败", "fail", JOptionPane.ERROR_MESSAGE);
+        }
+        return tmp;
     }
     public ArrayList<orders> custgetorder(int id){
         ArrayList<orders> tmp=new ArrayList<>();
@@ -122,6 +142,19 @@ public class orderdao implements orderdaoint{
             JOptionPane.showMessageDialog(null, e.getMessage()+"查询失败", "fail", JOptionPane.ERROR_MESSAGE);
             return null;
         }
+
+    }
+    public boolean outflower(orders o){
+        SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" );
+        try {
+            String sql = "UPDATE orders SET status = 0 , time='"+sdf.format(o.getTime())+"'WHERE id = '"+o.getId()+ "';";
+            //System.out.println(sql);
+            int t = c.createStatement().executeUpdate(sql);
+            String sql2="UPDATE flower SET saled = saled+"+o.getCount()+" WHERE id = '"+o.getFlowerid()+ "';";
+            t = c.createStatement().executeUpdate(sql2);
+        }
+        catch (Exception e) {return false;}
+        return true;
 
     }
 }

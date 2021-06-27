@@ -1,6 +1,8 @@
 package BI;
+import ent.customerent;
 import ent.flower;
 import ent.flowerstore;
+import ent.orders;
 
 import java.util.*;
 public interface FlowerStoreService {
@@ -16,11 +18,13 @@ public interface FlowerStoreService {
      */
     //public boolean addorder(int flowerid,int userid,int count);
     public flowerstore login(String username, String password);
-    public boolean addflower();
+    public boolean chaflower(flower d);
+    public boolean addflower(String name,String color,float price,int storeid);
     public ArrayList<flower> getflower(int storeid);
-    public List<String> getorder(int storeid);
-    public List<String> getsale(int storeid);
+    public ArrayList<orders> getorder(int storeid);
     public int getflowersaledd(int flowerid);
-    public boolean inflower(int flowerid,int storeid,int count);
-    public boolean outflower(int flowerid,int storeid,int count);
+    public boolean inflower(int flowerid,int count);
+    public boolean outflower(orders o);
+    public customerent getuserinfo(int userid);
+    public boolean setinfo(flowerstore store);
 }

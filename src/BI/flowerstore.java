@@ -3,14 +3,16 @@ package BI;
 import java.util.ArrayList;
 import java.util.List;
 import dao.*;
+import ent.customerent;
 import ent.flower;
+import ent.orders;
 
 public class flowerstore implements FlowerStoreService{
     public ent.flowerstore login(String username, String password){
         return daoFactory.getInstance().getDaoWarehouse().login(username,password);
     }
-    public boolean addflower() {
-        return false;
+    public boolean chaflower(flower d){
+        return daoFactory.getInstance().getDaoFlower().changeflower(d);
     }
 
     public ArrayList<flower> getflower(int storeid) {
@@ -19,20 +21,24 @@ public class flowerstore implements FlowerStoreService{
     public int getflowersaledd(int flowerid){
         return daoFactory.getInstance().getDaoOrder().getflowerasled(flowerid);
     }
-
-    public List<String> getorder(int storeid) {
-        return null;
+    public boolean setinfo(ent.flowerstore store){
+        return daoFactory.getInstance().getDaoWarehouse().setinfo(store);
+    }
+    public boolean addflower(String name,String color,float price,int storeid){
+        return daoFactory.getInstance().getDaoFlower().addflower(name,color,price,storeid);
+    }
+    public ArrayList<orders> getorder(int storeid) {
+        return daoFactory.getInstance().getDaoOrder().storegetorder(storeid);
+    }
+    public customerent getuserinfo(int userid){
+        return daoFactory.getInstance().getDaoUser().storegetuserinfo(userid);
     }
 
-    public List<String> getsale(int storeid) {
-        return null;
+    public boolean inflower(int flowerid,  int count) {
+        return daoFactory.getInstance().getDaoFlower().inflower(flowerid,count);
     }
 
-    public boolean inflower(int flowerid, int storeid, int count) {
-        return false;
-    }
-
-    public boolean outflower(int flowerid, int storeid, int count) {
-        return false;
+    public boolean outflower(orders o) {
+        return daoFactory.getInstance().getDaoOrder().outflower(o);
     }
 }

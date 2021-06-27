@@ -1,5 +1,5 @@
 /*
- * Created by JFormDesigner on Sat Jun 26 20:26:49 CST 2021
+ * Created by JFormDesigner on Sun Jun 27 12:28:48 CST 2021
  */
 
 package UI;
@@ -9,31 +9,30 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import BI.BIfactory;
-import ent.flowerstore;
+import ent.flower;
 import net.miginfocom.swing.*;
 
 /**
  * @author unknown
  */
-public class storeinfo extends JFrame {
-    flowerstore store;
-    public storeinfo(flowerstore store) {
-        this.store=store;
+public class changeflower extends JFrame {
+    flower f;
+    int storeid;
+    public changeflower(flower f) {
+        this.f=f;
+        this.storeid=storeid;
         initComponents();
-        label2.setText(store.getUsername());
-        textField2.setText(store.getPhone());
-        textField3.setText(store.getAddress());
-        textField4.setText(store.getName());
+        textField1.setText(f.getName());
+        label2.setText(String.valueOf(f.getId()));
+        textField2.setText(f.getColor());
+        textField3.setText(String.valueOf(f.getPrice()));
     }
 
     private void button1MouseClicked(MouseEvent e) {
-        if(!"".equals(textField1.getText())){
-            store.setPassword(textField1.getText());
-        }
-        store.setPhone(textField2.getText());
-        store.setAddress(textField3.getText());
-        store.setName(textField4.getText());
-        if(BIfactory.getInstance().getStorerService().setinfo(store)){
+        f.setName(textField1.getText());
+        f.setColor(textField2.getText());
+        f.setPrice(Float.parseFloat(textField3.getText()));
+        if(BIfactory.getInstance().getStorerService().chaflower(f)){
             JOptionPane.showMessageDialog(null,"修改成功","",JOptionPane.PLAIN_MESSAGE);
         }
         else{
@@ -42,6 +41,7 @@ public class storeinfo extends JFrame {
     }
 
     private void initComponents() {
+
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
         label1 = new JLabel();
@@ -52,8 +52,6 @@ public class storeinfo extends JFrame {
         textField2 = new JTextField();
         label5 = new JLabel();
         textField3 = new JTextField();
-        label6 = new JLabel();
-        textField4 = new JTextField();
         button1 = new JButton();
 
         //======== this ========
@@ -61,7 +59,6 @@ public class storeinfo extends JFrame {
         contentPane.setLayout(new MigLayout(
             "hidemode 3",
             // columns
-            "[fill]" +
             "[fill]" +
             "[fill]" +
             "[fill]" +
@@ -82,36 +79,30 @@ public class storeinfo extends JFrame {
             "[]" +
             "[]" +
             "[]" +
-            "[]" +
             "[]"));
 
         //---- label1 ----
-        label1.setText("\u7528\u6237\u540d");
-        contentPane.add(label1, "cell 3 1");
+        label1.setText("\u7f16\u53f7");
+        contentPane.add(label1, "cell 4 1");
 
         //---- label2 ----
         label2.setText("text");
-        contentPane.add(label2, "cell 5 1");
+        contentPane.add(label2, "cell 6 1");
 
         //---- label3 ----
-        label3.setText("\u5bc6\u7801");
-        contentPane.add(label3, "cell 3 2");
-        contentPane.add(textField1, "cell 5 2 5 1");
+        label3.setText("\u82b1\u540d");
+        contentPane.add(label3, "cell 4 2");
+        contentPane.add(textField1, "cell 6 2 5 1");
 
         //---- label4 ----
-        label4.setText("\u7535\u8bdd");
-        contentPane.add(label4, "cell 3 3");
-        contentPane.add(textField2, "cell 5 3 5 1");
+        label4.setText("\u989c\u8272");
+        contentPane.add(label4, "cell 4 3");
+        contentPane.add(textField2, "cell 6 3 5 1");
 
         //---- label5 ----
-        label5.setText("\u5730\u5740");
-        contentPane.add(label5, "cell 3 4");
-        contentPane.add(textField3, "cell 5 4 7 1");
-
-        //---- label6 ----
-        label6.setText("\u540d\u79f0");
-        contentPane.add(label6, "cell 3 5");
-        contentPane.add(textField4, "cell 5 5 7 1");
+        label5.setText("\u5355\u4ef7");
+        contentPane.add(label5, "cell 4 4");
+        contentPane.add(textField3, "cell 6 4 5 1");
 
         //---- button1 ----
         button1.setText("\u4fdd\u5b58");
@@ -121,7 +112,7 @@ public class storeinfo extends JFrame {
                 button1MouseClicked(e);
             }
         });
-        contentPane.add(button1, "cell 5 6");
+        contentPane.add(button1, "cell 6 6");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -137,8 +128,6 @@ public class storeinfo extends JFrame {
     private JTextField textField2;
     private JLabel label5;
     private JTextField textField3;
-    private JLabel label6;
-    private JTextField textField4;
     private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

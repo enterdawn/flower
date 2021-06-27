@@ -19,6 +19,7 @@ public class storedao implements storedaoint{
             JOptionPane.showMessageDialog(null, e.getMessage(), "数据库连接失败", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     protected void finalize() throws Throwable {
         super.finalize();
         if(c==null) return;
@@ -29,6 +30,16 @@ public class storedao implements storedaoint{
             JOptionPane.showMessageDialog(null,"连接关闭失败","fail",JOptionPane.ERROR_MESSAGE);
         }
     }
+    public boolean setinfo(flowerstore store){
+        try {
+            String sql = "UPDATE flowerstore SET name = '"+store.getName()+"',password ='"+store.getPassword()+"',phone ='"+ store.getPhone()+"',address='"+store.getAddress()+"' WHERE id = '"+store.getId()+ "';";
+            //System.out.println(sql);
+            int t = c.createStatement().executeUpdate(sql);
+        }
+        catch (Exception e) {return false;}
+        return true;
+    }
+
     public boolean addstore(String name, int phone, String address, String username, String password) {
         return false;
     }
@@ -42,7 +53,7 @@ public class storedao implements storedaoint{
             s.next();
             tm.setName(s.getString("name"));
             tm.setId(s.getInt("id"));
-            tm.setPhone(s.getString("id"));
+            tm.setPhone(s.getString("phone"));
             tm.setAddress(s.getString("address"));
             tm.setUsername(username);
             tm.setPassword(s.getString("password"));

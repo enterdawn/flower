@@ -29,6 +29,29 @@ public class userdao implements userdaoint{
     public boolean adduser(String name, int phone, String gender, String username, String password) {
         return false;
     }
+    public customerent storegetuserinfo(int id){
+        customerent tmp=new customerent ();
+        try {
+            String sql="select * from customer where id='"+id+"';";
+            PreparedStatement t = c.prepareStatement(sql);
+            ResultSet s=t.executeQuery();
+            s.next();
+            tmp.setid(s.getInt("id"));
+            tmp.setgender(s.getInt("gender"));
+            tmp.setname(s.getString("name"));
+            tmp.setphone(s.getString("phone"));
+
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage()+"查询失败", "fail", JOptionPane.ERROR_MESSAGE);
+        }
+
+        try {
+            this.finalize();
+        } catch (Throwable throwable) {
+            JOptionPane.showMessageDialog(null,"连接关闭失败"+throwable,"fail",JOptionPane.ERROR_MESSAGE);
+        }
+        return tmp;
+    }
 
     public customerent getuserinfo(String username){
         customerent tmp=new customerent ();

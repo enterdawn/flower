@@ -26,18 +26,19 @@ public class userstore extends JFrame {
     ArrayList<flower> flowers;
     String a[][]={};
     int selectrow=-1;
-    String columnNames[]={"名称","颜色","单价","库存"};
+    String columnNames[]={"编号","名称","颜色","单价","库存"};
     public userstore(customerent User, flowerstore store) {
         this.User=User;
         this.store=store;
         initComponents();
+        table1.getTableHeader().setReorderingAllowed( false ) ;
         label1.setText(store.getName());
         label2.setText(store.getPhone());
         label3.setText(store.getAddress());
         flowers= BIfactory.getInstance().getCustomerService().getflower(store.getId());
         table1.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         for (int i = 0; i < flowers.size(); i++) {
-            String values[]={flowers.get(i).getName(),flowers.get(i).getColor(), String.valueOf(flowers.get(i).getPrice()), String.valueOf(flowers.get(i).getStock()-flowers.get(i).getSaled())};
+            String values[]={String.valueOf(flowers.get(i).getId()),flowers.get(i).getName(),flowers.get(i).getColor(), String.valueOf(flowers.get(i).getPrice()), String.valueOf(flowers.get(i).getStock()-flowers.get(i).getSaled())};
             tableModel1.addRow(values);
         }
     }
@@ -51,15 +52,24 @@ public class userstore extends JFrame {
             JOptionPane.showMessageDialog(null,"请选择鲜花","失败",JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if((int)spinner1.getValue()>flowers.get(selectrow).getStock()-flowers.get(selectrow).getSaled()){
+        System.out.println(table1.getValueAt(selectrow, 0));
+        int id=Integer.valueOf(table1.getValueAt(selectrow, 0).toString());
+        flower d = new flower();
+        for (int i = 0; i < flowers.size(); i++) {
+            if(flowers.get(i).getId()==id){
+                d=flowers.get(i);
+                break;
+            }
+        }
+        if((int)spinner1.getValue()>d.getStock()-d.getSaled()){
             JOptionPane.showMessageDialog(null,"库存不足","失败",JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if(BIfactory.getInstance().getCustomerService().addorder(store.getId(),flowers.get(selectrow).getId(),User.getid(),(int)spinner1.getValue(),flowers.get(selectrow).getPrice())==true){
+        if(BIfactory.getInstance().getCustomerService().addorder(store.getId(),d.getId(),User.getid(),(int)spinner1.getValue(),d.getPrice())==true){
             JOptionPane.showMessageDialog(null,"下单成功","",JOptionPane.PLAIN_MESSAGE);
             tableModel1.getDataVector().clear();
             for (int i = 0; i < flowers.size(); i++) {
-                String values[]={flowers.get(i).getName(),flowers.get(i).getColor(), String.valueOf(flowers.get(i).getPrice()), String.valueOf(flowers.get(i).getStock()-flowers.get(i).getSaled())};
+                String values[]={String.valueOf(flowers.get(i).getId()),flowers.get(i).getName(),flowers.get(i).getColor(), String.valueOf(flowers.get(i).getPrice()), String.valueOf(flowers.get(i).getStock()-flowers.get(i).getSaled())};
                 tableModel1.addRow(values);
             }
         }
@@ -89,7 +99,7 @@ public class userstore extends JFrame {
                 if(!isDouble(textField4.getText())) JOptionPane.showMessageDialog(null,"最大价格非法","失败",JOptionPane.ERROR_MESSAGE);
                 if(!(flowers.get(i).getPrice()>Float.parseFloat(textField4.getText()))) continue;
             }
-            String values[]={flowers.get(i).getName(),flowers.get(i).getColor(), String.valueOf(flowers.get(i).getPrice()), String.valueOf(flowers.get(i).getStock()-flowers.get(i).getSaled())};
+            String values[]={String.valueOf(flowers.get(i).getId()),flowers.get(i).getName(),flowers.get(i).getColor(), String.valueOf(flowers.get(i).getPrice()), String.valueOf(flowers.get(i).getStock()-flowers.get(i).getSaled())};
             tableModel1.addRow(values);
         }
     }

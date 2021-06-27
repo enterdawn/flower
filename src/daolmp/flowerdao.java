@@ -3,7 +3,9 @@ package daolmp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import dao.dbutil;
 import ent.flower;
@@ -30,14 +32,24 @@ public class flowerdao implements flowerdaoint{
             JOptionPane.showMessageDialog(null,"连接关闭失败","fail",JOptionPane.ERROR_MESSAGE);
         }
     }
-    public boolean addflower(String name,String color,String price,int storeid){
-        String sql="insert into flower name,color,price,storeid values(,,,,)";
-        return true;
+    public boolean addflower(String name,String color,float price,int storeid){
+        String sql="INSERT INTO flower (name,color,price,store,stock,saled) VALUES ('"+name+"','"+color+"','"+price+"','"+storeid+"','"+"0"+"','"+ "0"+"');";
+        System.out.println(sql);
+        try {
+            int t = c.createStatement().executeUpdate(sql);
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"添加失败","fail",JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
     }
-    public boolean changeflower(String flowerid,String name,String color,String price){
-        return true;
-    }
-    public boolean inflower(int flowerid,int cnt){
+    public boolean changeflower(flower f){
+        try {
+            String sql = "UPDATE flower SET name = '"+f.getName()+"',color='"+f.getColor()+"',price='"+ f.getPrice()+"' WHERE id = '"+f.getId()+ "';";
+            //System.out.println(sql);
+            int t = c.createStatement().executeUpdate(sql);
+        }
+        catch (Exception e) {return false;}
         return true;
     }
     public boolean outflower(int flowerid,int cnt){
@@ -84,6 +96,15 @@ public class flowerdao implements flowerdaoint{
             JOptionPane.showMessageDialog(null,e,"fail",JOptionPane.ERROR_MESSAGE);
         }
         return 0;
+    }
+    public boolean inflower(int flowerid, int count){
+        try {
+            String sql = "UPDATE flower SET stock = stock+"+count+" WHERE id = '"+flowerid+ "';";
+            //System.out.println(sql);
+            int t = c.createStatement().executeUpdate(sql);
+        }
+        catch (Exception e) {return false;}
+        return true;
     }
 
 }
